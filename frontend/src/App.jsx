@@ -1,7 +1,7 @@
-import FetchUsers from "./components/FetchUsers"
+import CrudUsers from './components/CrudUsers';
 
 export default function App() {
   return (
-    <FetchUsers />
-  )
+    <CrudUsers />
+  );
 }
