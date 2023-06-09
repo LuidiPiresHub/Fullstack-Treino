@@ -77,7 +77,13 @@ export default function FetchUsers() {
       <form onSubmit={postUser}>
         <label htmlFor="name">
           Name
-          <input type="text" id="name" value={name} placeholder={placeError} onChange={({ target: { value } }) => setName(value)} />
+          <input
+            type="text"
+            id="name"
+            value={name}
+            placeholder={placeError}
+            onChange={({ target: { value } }) => setName(value)}
+          />
         </label>
         <button type="submit">Enviar</button>
       </form>
@@ -101,7 +107,14 @@ export default function FetchUsers() {
                       <tr key={index}>
                         <td>{person.id}</td>
                         <td>{person.name}</td>
-                        <td><button type="button" onClick={() => deleteUser(person.id)}>Deletar</button></td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => deleteUser(person.id)}
+                          >
+                            Deletar
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -114,7 +127,12 @@ export default function FetchUsers() {
                       <option key={index} value={id}>{id}</option>
                     ))}
                   </select>
-                  <input type="text" placeholder="Usuario a ser editado" name='userUpdated' onChange={handleChange} />
+                  <input
+                    type="text"
+                    placeholder="Usuario a ser editado"
+                    name='userUpdated'
+                    onChange={handleChange}
+                  />
                   <button type="submit">Atualizar</button>
                 </form>
               </section>
