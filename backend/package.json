@@ -9,7 +9,7 @@
     "dev": "nodemon --exec ts-node src/index.ts",
     "lint": "eslint . --fix",
     "restart": "npx tsc && npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
-    "prestart": "npx tsc && npx sequelize db:create && npx sequelize db:migrate",
+    "prestart": "npx sequelize db:create && npx sequelize db:migrate",
     "db:create": "npx tsc && npx sequelize db:create",
     "db:drop": "npx tsc && npx sequelize db:drop",
     "migrate": "npx tsc && npx sequelize db:migrate",
