@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styles from '../styles/crudUsers.module.css';
 
 export default function FetchUsers() {
   // Tudo que está acima do return é javascript
@@ -74,28 +75,46 @@ export default function FetchUsers() {
   return (
     // Tudo que está dentro do return é html
     // Ao abrir um objeto dentro de uma tag é possivel usar javascript
-    <section>
-      <form onSubmit={postUser}>
-        <label htmlFor="name">
-          Name
+    <section className={styles.sectionContainer}>
+      <section className={ styles.formContainer }>
+        <form onSubmit={postUser} className={styles.form}>
+          <h1>Novo Usuario</h1>
           <input
             type="text"
             id="name"
             value={name}
             placeholder={placeError}
+            className={styles.input}
             onChange={({ target: { value } }) => setName(value)}
           />
-        </label>
-        <button type="submit">Enviar</button>
-      </form>
-      <section>
+          <button type="submit" className={styles.button}>Enviar</button>
+        </form>
+        <form onSubmit={updateUser} className={styles.form}>
+          <h2>Edite o usuario pelo Id</h2>
+          <select name='id' onChange={handleChange} className={styles.select}>
+            <option value="">Selecione um Id</option>
+            {usuarios.map(({ id }, index) => (
+              <option key={index} value={id}>{id}</option>
+            ))}
+          </select>
+          <input
+            type="text"
+            placeholder="Usuario a ser editado"
+            name='userUpdated'
+            className={styles.input}
+            onChange={handleChange}
+          />
+          <button type="submit" className={styles.button}>Atualizar</button>
+        </form>
+      </section>
+      <section className={styles.mainContainer}>
         {!isFetching ? (
           <section>
             {!usuarios.length ? (
               <span>{error}</span>
             ) : (
-              <section>
-                <table>
+              <section className={styles.tableContainer}>
+                <table className={styles.table}>
                   <thead>
                     <tr>
                       <th>Id</th>
@@ -111,6 +130,7 @@ export default function FetchUsers() {
                         <td>
                           <button
                             type="button"
+                            className={styles.tableDeleteBtn}
                             onClick={() => deleteUser(person.id)}
                           >
                             Deletar
@@ -120,22 +140,6 @@ export default function FetchUsers() {
                     ))}
                   </tbody>
                 </table>
-                <form onSubmit={updateUser}>
-                  <h2>Edite o usuario pelo Id</h2>
-                  <select name='id' onChange={handleChange}>
-                    <option value="">Selecione um Id</option>
-                    {usuarios.map(({ id }, index) => (
-                      <option key={index} value={id}>{id}</option>
-                    ))}
-                  </select>
-                  <input
-                    type="text"
-                    placeholder="Usuario a ser editado"
-                    name='userUpdated'
-                    onChange={handleChange}
-                  />
-                  <button type="submit">Atualizar</button>
-                </form>
               </section>
             )}
           </section>
