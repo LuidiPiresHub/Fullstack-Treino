@@ -7,3 +7,7 @@
 body {
   background-color: rgb(240, 240, 240);
 }
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0 30px white inset;
+}

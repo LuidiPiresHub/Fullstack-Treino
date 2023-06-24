@@ -58,6 +58,7 @@
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+  width: 100%;
 }
 
 .table {
@@ -97,6 +98,42 @@
   appearance: none;
   border-bottom: 2px solid black;
   cursor: pointer;
+}
+
+.pageContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.pageBtn {
+  font-size: medium;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  transition: 500ms;
+}
+
+.pageBtn:first-child:hover {
+  background-color: red;
+  color: white;
+}
+
+.pageBtn:last-child:hover {
+  background-color:rgb(0, 46, 248);
+  color: white;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.error {
+  font-size: 1.5rem;
 }
 
 @media (max-width: 1270px) {

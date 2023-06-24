@@ -6,7 +6,7 @@ import userRoute from './routes/userRoute';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: 'https://ecommerce-dev.vercel.app' }));
 app.use(express.json());
 
 const port = process.env.PORT;

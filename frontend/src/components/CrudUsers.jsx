@@ -12,10 +12,12 @@ export default function FetchUsers() {
   const [error, setError] = useState('');
   const [placeError, setPlaceError] = useState(INITIAL_PLACE);
   const [newUser, setNewUser] = useState({ id: '', userUpdated: '' });
+  const [page, setPage] = useState(0);
+  console.log(page);
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch(`${API_URL}/users`);
+      const response = await fetch(`${API_URL}/users?page=${page}`,);
       const { message } = await response.json();
       if (!response.ok) throw new Error(message);
       setUsuarios(message);
@@ -28,7 +30,7 @@ export default function FetchUsers() {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [page]);
 
   const postUser = async (event) => {
     event.preventDefault();
@@ -72,11 +74,23 @@ export default function FetchUsers() {
     fetchUsers();
   };
 
+  const pageDecrement = () => {
+    if (page > 0) {
+      setPage((prevState) => prevState - 1);
+    }
+  }
+
+  const pageIncrement = () => {
+    if (usuarios.length) {
+      setPage((prevState) => prevState + 1);
+    }
+  }
+
   return (
     // Tudo que está dentro do return é html
     // Ao abrir um objeto dentro de uma tag é possivel usar javascript
     <section className={styles.sectionContainer}>
-      <section className={ styles.formContainer }>
+      <section className={styles.formContainer}>
         <form onSubmit={postUser} className={styles.form}>
           <h1>Novo Usuario</h1>
           <input
@@ -109,9 +123,9 @@ export default function FetchUsers() {
       </section>
       <section className={styles.mainContainer}>
         {!isFetching ? (
-          <section>
+          <section className={styles.errorContainer}>
             {!usuarios.length ? (
-              <span>{error}</span>
+              <span className={styles.error}>{error}</span>
             ) : (
               <section className={styles.tableContainer}>
                 <table className={styles.table}>
@@ -142,6 +156,10 @@ export default function FetchUsers() {
                 </table>
               </section>
             )}
+            <section className={styles.pageContainer}>
+              <button className={styles.pageBtn} onClick={pageDecrement}>Prev</button>
+              <button className={styles.pageBtn} onClick={pageIncrement}>Next</button>
+            </section>
           </section>
         ) : (
           <span>Loading...</span>
